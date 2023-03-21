@@ -1,0 +1,23 @@
+{
+  "name": "@loadshark/in-memory",
+  "description": "An abstraction to use in-memory cache strategy",
+  "author": "Daniel Souza",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.3",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "redis": "^4.6.5"
+  },
+  "keywords": ["node", "nodejs", "typescript", "in-memory", "cache", "redis"],
+  "homepage": "https://loadshark.github.io/in-memory/",
+  "repository": "https://github.com/loadshark/in-memory.git",
+  "license": "MIT",
+  "files": ["lib/"]
+}
