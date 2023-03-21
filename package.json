@@ -16,8 +16,7 @@
     "redis": "^4.6.5"
   },
   "keywords": ["node", "nodejs", "typescript", "in-memory", "cache", "redis"],
-  "homepage": "https://loadshark.github.io/in-memory/",
-  "repository": "https://github.com/loadshark/in-memory.git",
+  "repository": "https://github.com/loadshark-root/in-memory.git",
   "license": "MIT",
   "files": ["lib/"]
 }
