@@ -7,6 +7,9 @@ import { Maybe } from "../../../types/helpers";
 import { InMemoryMethods } from "../types/in-memory";
 
 export type RedisInstance = ReturnType<typeof createClient>
+export type RedisClientOptionsWithCustom = RedisClientOptions & {
+  environment?: string;
+}
 
 export let maxAttemptsToReconnect = 3
 export const socketOptions = {
@@ -23,11 +26,16 @@ export const socketOptions = {
 }
 
 let _redis: Maybe<RedisInstance>
+let _redisOptions: RedisClientOptionsWithCustom
 
 export const startInMemory = (options: RedisClientOptions): RedisInstance | null => {
   try {
-    _redis = createClient({...options, ...socketOptions})
+    _redisOptions = {...options, ...socketOptions}
+    _redis = createClient(_redisOptions)
     _redis?.connect()
+      .catch(e => {
+        console.log(e)
+      })
     return _redis;
   } catch (err) {
     console.error(err)
@@ -73,10 +81,15 @@ export const useInMemory = <V>(): InMemoryMethods<V> => {
      } 
   }
 
-  const generateKey = (text: string, replaceBaseUrl = true): string => 
-    Buffer
-      .from(text.replace(replaceBaseUrl ? '/api' : '', ''))
+  const generateKey = (text: string, replaceBaseUrl = true): string => {
+    let prefix = ''
+    if (_redisOptions.environment) {
+      prefix = _redisOptions.environment
+    }
+    return Buffer
+      .from(prefix + text.replace(replaceBaseUrl ? '/api' : '', ''))
       .toString('base64')
+  }
 
   return {
     get,
