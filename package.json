@@ -6,7 +6,8 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "build:publish": "npm run build && npm publish"
   },
   "devDependencies": {
     "@types/node": "^18.15.3",
